@@ -23,7 +23,7 @@ git clone https://github.com/IliasVilux/CLiCKO.git
 
 <p>&nbsp;</p>
 
-Una vez ya esté el proyecto clonado, debemos instalar el composer:
+Una vez ya esté el proyecto clonado, debemos instalar el composer dentro del repositorio:
 ```
 composer install
 ```
