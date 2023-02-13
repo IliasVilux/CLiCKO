@@ -26,15 +26,14 @@ class UserApiController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-            'password' => 'required|min:5'
-        ]);
-
         $check = User::where('email', $request->email)->first();
         if(!$check)
         {
+            $validate = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email',
+                'password' => 'required|min:5'
+            ]);
             $newUser = User::create($request->all());
             return $newUser;
         }

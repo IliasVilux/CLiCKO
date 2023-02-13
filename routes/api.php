@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserApiController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,19 +16,11 @@ use App\Http\Controllers\UserApiController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function (){
+    Route::post('/userinfo', [AuthController::class, 'infoUser']);
+    
+    Route::apiResource('users', UserApiController::class);
+    Route::get('/top', [UserApiController::class, 'top']);
 });
-
-/* Route::post('/users', [UserApiController::class, 'store']);
-
-Route::get('/users', [UserApiController::class, 'index']);
-Route::get('/users/{id}', [UserApiController::class, 'show']);
-Route::get('/top', [UserApiController::class, 'top']);
-
-Route::put('/users/{id}', [UserApiController::class, 'update']);
-
-Route::delete('/users/{id}', [UserApiController::class, 'destroy']); */
-
-Route::apiResource("users", UserApiController::class);
-Route::get('/top', [UserApiController::class, 'top']);
+Route::post('/register', [AuthController::class, 'registerApi']);
+Route::post('/login', [AuthController::class, 'loginApi']);

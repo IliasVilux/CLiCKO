@@ -1,61 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://https://clicko.es/" target="_blank"><img src="https://blog.clicko.es/wp-content/uploads/2018/09/clicko-venta-online-smartphone-1160x568.jpg" width="1350" height="200" style="object-fit: cover; object-position: left bottom;"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<h2 align="center" style="color: #0B951F"><b>CLiCKO</b> / Prueba técnica</h2>
 
-## About Laravel
+# **Introducción**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este proyecto aparece a raíz de la prueba técnica desarrollada para [CLiCKO](https://clicko.es/). Consiste de crear una API con el framework de [Laravel](https://laravel.com/docs) en la versión 8.x.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Para realizar esta prueba había varios puntos que el proyecto debería tener:
+- Seeder para añadir 20 usuarios en la base de datos
+- Crear un endpoint que devuelva los 3 dominios más frecuentes, en orden descendente
+- CRUD básico
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p>&nbsp;</p>
 
-## Learning Laravel
+# **Instalación**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Para empezar debemos clonar el repositorio:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git clone https://github.com/IliasVilux/CLiCKO.git
+```
 
-## Laravel Sponsors
+<p>&nbsp;</p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Una vez ya esté el proyecto clonado, debemos instalar el composer:
+```
+composer install
+```
+Para poder conectarnos a la base de datos, tenemos que crear el archivo `.env` y modificar las variables de la base de datos:
 
-### Premium Partners
+```
+cp .env.example .env
+```
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre-de-la-base-de-datos*
+DB_USERNAME=nombre-de-usuario
+DB_PASSWORD=contraseña
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+<p>&nbsp;</p>
 
-## Contributing
+Configurada ya la conexión a la base de datos, ya podemos ejecutar las migraciones y el seeder para alimentar la base de datos.
+```
+php artisan migrate -seed
+```
+Los datos se han generado con [FakerPHP](https://fakerphp.github.io/), que es una librería que genera datos falsos para poder trabajar de una manera más realista en el entorno de desarrollo.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<p>&nbsp;</p>
 
-## Code of Conduct
+> **Atención!**
+> Al ejecutar este comando saltará un error y es porque en el seeder duplica la última inyección a la base de datos. Pero aun así los 20 usuarios se habrán insertado correctamente.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-## Security Vulnerabilities
+# **Utilización**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Teniendo el proyecto ya configurado, ejecutamos el siguiente comando en la terminal para inicializar el servidor:
+```
+php artisan serve
+```
+Ahora ya podemos acceder a la ruta donde se nos ha desplegado el servidor de desarollo.
 
-## License
+<p>&nbsp;</p>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+|                                         |        |                 |
+|:---                                     | :---:  |             ---:|
+| Registro                                | POST   | /api/register   |
+| Login                                   | POST   | /api/login      |
+| Crear nuevo usuario                     | POST   | /api/users      |
+| Mostrar todos los usuarios              | GET    | /api/users      |
+| Mostrar usuario específico              | GET    | /api/users/{id} |
+| Modificar usuario                       | PUT    | /api/users/{id} |
+| Eliminar usuario                        | DELETE | /api/users/{id} |
+| Los 3 dominios más usados (descendente) | GET    | /api/top        |
+
+<p>&nbsp;</p>
+
+En la API se ha implementado [Sanctum](https://laravel.com/docs/8.x/sanctum), por lo que debemos de registrarnos para poder acceder a las peticiones. Para ello accedemos a la ruta que le pertenece `/api/register` y como parámetros añadimos el nombre, email y contraseña.
+```json
+{
+    "name": "Marijke Felicitas",
+    "email": "bavec65509@mustbeit.com",
+    "password": "MYrODwiNg"
+}
+```
+Una vez registrados, podemos acceder a `/api/login` y con nuestras credenciales iniciar sesión, obteniendo un token. Este lo tenemos que añadir en el apartado de Autorización y a partir de entonces podemos acceder a todas las rutas
+![Auth Token](https://i.gyazo.com/a482b70f6e9121c57a82573d48a76b2f.png)
+
+<p>&nbsp;</p>
+
+Para crear un usuario se deben de pasar 3 parámetros que son obligatorios. El **nombre**, el **email**, que de no estar en el formato correcto no se creará el usuario y por último la **contraseña**, que debe de tener un mínimo de 5 caracteres y esta se encripta automáticamente gracias al sistema de hashing de Laravel `bcrypt()`
+```
+{
+  "name": "Eppie Berniece",
+  "email": "bavec65509@hotmail.com",
+  "password": "TeRfulAdB"
+}
+```
+
+Para modificar un usuario, se deben de pasar los datos que se deseen modificar y en caso de introducir uno de los datos de manera errónea, solo este no será modificado, en cambio, si el resto de datos introducidos son correctos, si lo serán.
