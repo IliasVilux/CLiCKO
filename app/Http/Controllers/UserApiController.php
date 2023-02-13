@@ -32,13 +32,13 @@ class UserApiController extends Controller
             'password' => 'required|min:5'
         ]);
 
-        $check = User::where('name', $request->name)->orWhere('email', $request->email)->first();
+        $check = User::where('email', $request->email)->first();
         if(!$check)
         {
             $newUser = User::create($request->all());
             return $newUser;
         }
-        return response()->json('Name or Email already exist! Try with new credentials.');
+        return response()->json('This email already exist! Try with new credentials.');
     }
 
     /**
@@ -49,8 +49,13 @@ class UserApiController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id', $id)->get();
-        return $user;
+        $user = User::where('id', $id)->first();
+        if($user)
+        {
+            return $user;
+        } else {
+            return response()->json('No user found with ID: ' . $id);
+        }
     }
 
     /**
@@ -62,7 +67,30 @@ class UserApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $reqName = $request->name;
+        $reqEmail = $request->email;
+        $reqMod = false;
+
+        if($reqName && strlen($reqName) > 0)
+        {
+            $user->name = $reqName;
+            $user->save();
+            $reqMod = true;
+        }
+        if($reqEmail && strlen($reqEmail) > 0 && str_contains($reqEmail, '@'))
+        {
+            $user->email = $reqEmail;
+            $user->save();
+            $reqMod = true;
+        }
+        if ($reqMod)
+        {
+            return $user;
+        } else {
+            return response()->json('No changes were made for user with id: ' . $id);
+        }
     }
 
     /**
@@ -90,6 +118,15 @@ class UserApiController extends Controller
     public function top()
     {
         $users = User::all();
-        return $users;
+        $allEmails = array();
+        foreach ($users as $user)
+        {
+            $userEmail = substr($user->email, strrpos($user->email, '@' )+1);
+            array_push($allEmails, $userEmail);
+        }
+        $emailsCount = array_count_values($allEmails);
+        asort($emailsCount);
+        $top = array_reverse(array_slice($emailsCount, -3, 3));
+        return $top;
     }
 }
