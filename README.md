@@ -1,4 +1,4 @@
-<p align="center"><a href="https://https://clicko.es/" target="_blank"><img src="https://blog.clicko.es/wp-content/uploads/2018/09/clicko-venta-online-smartphone-1160x568.jpg" width="1350" height="200" style="object-fit: cover; object-position: left bottom;"></a></p>
+<p align="center"><a href="https://https://clicko.es/" target="_blank"><img src="https://blog.clicko.es/wp-content/uploads/2018/09/clicko-venta-online-smartphone-1160x568.jpg" width="1350"></a></p>
 
 <h2 align="center" style="color: #0B951F"><b>CLiCKO</b> / Prueba técnica</h2>
 
@@ -20,8 +20,6 @@ Para empezar debemos clonar el repositorio:
 ```
 git clone https://github.com/IliasVilux/CLiCKO.git
 ```
-
-<p>&nbsp;</p>
 
 Una vez ya esté el proyecto clonado, debemos instalar el composer dentro del repositorio:
 ```
@@ -45,16 +43,13 @@ DB_PASSWORD=contraseña
 
 Configurada ya la conexión a la base de datos, ya podemos ejecutar las migraciones y el seeder para alimentar la base de datos.
 ```
-php artisan migrate -seed
+php artisan migrate --seed
 ```
 Los datos se han generado con [FakerPHP](https://fakerphp.github.io/), que es una librería que genera datos falsos para poder trabajar de una manera más realista en el entorno de desarrollo.
-
-<p>&nbsp;</p>
 
 > **Atención!**
 > Al ejecutar este comando saltará un error y es porque en el seeder duplica la última inyección a la base de datos. Pero aun así los 20 usuarios se habrán insertado correctamente.
 
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 
 # **Utilización**
@@ -63,9 +58,7 @@ Teniendo el proyecto ya configurado, ejecutamos el siguiente comando en la termi
 ```
 php artisan serve
 ```
-Ahora ya podemos acceder a la ruta donde se nos ha desplegado el servidor de desarollo.
-
-<p>&nbsp;</p>
+Ahora ya podemos acceder a la ruta donde se nos ha desplegado el servidor de desarollo `http://127.0.0.1:8000`.
 
 |                                         |        |                 |
 |:---                                     | :---:  |             ---:|
