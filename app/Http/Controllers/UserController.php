@@ -12,17 +12,4 @@ class UserController extends Controller
         $usersCreation = User::factory()->count(20)->create();
         return $usersCreation;
     }
-
-    public function fetch()
-    {
-        $users = User::all();
-        return $users;
-    }
-
-    public function fetchId(Request $request)
-    {
-        $searchId = $request->input();
-        $user = User::where('id', $searchId)->get();
-        return $user;
-    }
 }

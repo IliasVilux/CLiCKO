@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', [UserController::class, 'fetch']);
-Route::get('/users/{id}', [UserController::class, 'fetchId']);
+Route::post('/users', [UserApiController::class, 'store']);
+Route::get('/users', [UserApiController::class, 'index']);
+Route::get('/users/{id}', [UserApiController::class, 'show']);
+Route::get('/users/top', [UserApiController::class, 'top']);
+Route::delete('/users/{id}', [UserApiController::class, 'destroy']);
